@@ -1,29 +1,19 @@
 import ast
 import difflib
 import argparse
-import sys
-
-class Normalizer(ast.NodeTransformer):
-    def visit_Name(self, node):
-        return ast.copy_location(ast.Name(id='var', ctx=node.ctx), node)
-
-    def visit_arg(self, node):
-        node.arg = 'arg'
-        return node
-
-    def visit_FunctionDef(self, node):
-        # Keep function name for precision
-        self.generic_visit(node)
-        return node
-
-    def visit_ClassDef(self, node):
-        # Keep class name for precision
-        self.generic_visit(node)
-        return node
-
-    # Do NOT normalize constants here – keep real literals
 
 def normalize_ast(tree):
+    """Normalize AST to abstract away variable and function names."""
+    class Normalizer(ast.NodeTransformer):
+        def visit_Name(self, node):
+            return ast.copy_location(ast.Name(id='var', ctx=node.ctx), node)
+        def visit_arg(self, node):
+            node.arg = 'arg'
+            return node
+        def visit_FunctionDef(self, node):
+            node.name = 'func'
+            self.generic_visit(node)
+            return node
     return Normalizer().visit(tree)
 
 def load_and_normalize_ast(filepath):
@@ -32,17 +22,9 @@ def load_and_normalize_ast(filepath):
     try:
         tree = ast.parse(source)
         norm_tree = normalize_ast(tree)
-        ast.fix_missing_locations(norm_tree)
-
-        try:
-            from ast import unparse
-            normalized_code = unparse(norm_tree)
-        except ImportError:
-            normalized_code = ast.dump(norm_tree)
-
-        return normalized_code
+        return ast.dump(norm_tree)
     except SyntaxError as e:
-        print(f"Syntax error in {filepath}: {e}", file=sys.stderr)
+        print(f"Syntax error in {filepath}: {e}")
         return ""
 
 def main():
