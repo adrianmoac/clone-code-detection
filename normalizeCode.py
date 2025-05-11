@@ -2,8 +2,9 @@ import tokenize
 import token as TK
 from io import BytesIO
 import re  
+import os
 
-def refactorCode(originalCode) -> str:
+def refactorCode(filePath, dir) -> str:
     """
     Removes spaces, comments and changes all not reserved words for a default name.
     """
@@ -20,6 +21,8 @@ def refactorCode(originalCode) -> str:
     id_counter = 0
     newTokens = []
 
+    with open(filePath, 'r') as f:
+        originalCode = f.read()
 
     cleanedLines = []
     insideMultilineComment = False
@@ -55,4 +58,29 @@ def refactorCode(originalCode) -> str:
             newTokens.append(token)
 
     result = tokenize.untokenize(newTokens)
-    return result.decode('utf-8')
+
+    outputDir = "./normalizedDataset"
+
+    os.makedirs('normalizedDataset', exist_ok=True)
+    filePath = os.path.join(outputDir, dir)
+
+    with open(filePath, "w") as f:
+        f.write(result.decode('utf-8'))
+    # return result.decode('utf-8')
+
+def main():
+    path = './dataset'
+    dir_list = os.listdir(path)
+    print("Files and directories in '", path, "' :")
+    print(dir_list)
+
+    for dir in dir_list:
+        if dir != '.DS_Store':
+            refactorCode('dataset/' + dir, dir)
+
+    # refactorCode('dataset/' + 't1_1.py')
+
+
+
+if __name__ == "__main__":
+    main()

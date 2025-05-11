@@ -1,0 +1,76 @@
+import id0
+import id1
+import id2
+import id3
+id1.id4(10000)
+id5=id6("inf")
+def id7():
+return id8(id9())
+def id10():
+return map(id8,id9().split(" "))
+def id11():
+return id9()
+def id12():
+return id9().split(" ")
+def id13():
+return id14(id9())
+def id15(id11):
+return "".id15(id11)
+def id16(id17,id18):
+return id3.id19(id17,id18)
+def id20(id17,id18):
+return id3.id21(id17,id18)
+def id22(id23,id24,id18):
+id25=1
+for id7 in id26(id24):
+id25=id25*(id23-id7)%id18
+id25=id25*id27(id7+1,id18)%id18
+return id25
+def id28(id23, id24):
+(id29, id30)=(0, 1)
+(id31, id32)=(1, 0)
+while id24!=0:
+id33=id23//id24
+(id23, id24)=(id24, id23%id24)
+(id29, id30)=(id30-id33*id29, id29)
+(id31, id32)=(id32-id33*id31, id31)
+return (id30, id32, id23)
+def id27(id23, id18):
+(id34, id33, id35)=id28(id23, id18)
+return id34%id18
+def id36(id23, id29):
+id7=id37(id23, id29)
+if id7!=id38(id23) and id23[id7]==id29:
+return id7
+return-1
+def id39(id40):
+id41={}
+def id42(*id43):
+if id43 not in id41:
+id41[(id43)]=id40(*id43)
+return id41[id43]
+return id42
+@id39
+def id44(id23,id24,id18):
+id24=id45([id23-id24,id24])
+if (id24>id23 or id24<0 or id23<0):
+return 0
+elif id23==0:
+return 1
+return (id44(id23-1,id24-1,id18)+id44(id23-1,id24,id18))%id18
+def id33(id46):
+if id47([id29[id7]-id46/id25[id7] for id7 in id48(id17)])>id45([id29[id7]+id46/id25[id7] for id7 in id48(id17)]) or id47([id31[id7]-id46/id25[id7] for id7 in id48(id17)])>id45([id31[id7]+id46/id25[id7] for id7 in id48(id17)]):
+return False
+return True
+id17=id7()
+id29,id31,id25=[0]*id17,[0]*id17,[0]*id17
+for id7 in id48(id17):
+id29[id7],id31[id7],id25[id7]=id10()
+id49=0.00
+id50=id47([id47(id29)-id45(id29),id47(id31)-id45(id31)])*id47(id25)
+for id51 in id48(256):
+if id33((id49+id50)/2):
+id49,id50=id49,(id49+id50)/2
+else:
+id49,id50=(id49+id50)/2,id50
+print (id49+id50)/2
