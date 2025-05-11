@@ -3,19 +3,15 @@ import refactorCode
 import calculateSimilarity
 
 
-def getDiff(file1, file2, preprocessCode):
+def getDiff(file1, file2):
   """
   Calculate the similarities of two received files by using the original files or preprocess them to find more similarities. 
   """
   f1 = open(file1).read()
   f2 = open(file2).read()
-    
-  if preprocessCode:
-    lines1 = refactorCode.refactorCode(file1).splitlines(keepends=True)
-    lines2 = refactorCode.refactorCode(file2).splitlines(keepends=True)
-  else:
-    lines1 = f1.splitlines(keepends=True)
-    lines2 = f2.splitlines(keepends=True)
+  
+  lines1 = refactorCode.refactorCode(file1).splitlines(keepends=True)
+  lines2 = refactorCode.refactorCode(file2).splitlines(keepends=True)
 
   # Get similarities
   diff = list(difflib.ndiff(lines1, lines2))
