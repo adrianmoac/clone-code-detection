@@ -1,6 +1,6 @@
 import difflib
-import refactorCode
-import calculateSimilarity
+from . import refactorCode
+from . import calculateSimilarity
 
 def countTotalCharacters(lines):
   """
@@ -36,4 +36,4 @@ def getDiff(file1, file2):
   else:
     shortestFileLength = lines2Length
   
-  calculateSimilarity.getSimilarity(shortestFileLength, diff)
+  return calculateSimilarity.getSimilarity(shortestFileLength, diff)

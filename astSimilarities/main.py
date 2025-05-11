@@ -22,22 +22,17 @@ def load_and_normalize_ast(filepath):
     try:
         tree = ast.parse(source)
         norm_tree = normalize_ast(tree)
-        return ast.dump(norm_tree)
+        return ast.dump(tree)
     except SyntaxError as e:
         print(f"Syntax error in {filepath}: {e}")
         return ""
 
-def main():
-    parser = argparse.ArgumentParser(description="Compare two Python files by normalized AST similarity.")
-    parser.add_argument("file1", help="Path to the first Python file")
-    parser.add_argument("file2", help="Path to the second Python file")
-    args = parser.parse_args()
-
-    dump1 = load_and_normalize_ast(args.file1)
-    dump2 = load_and_normalize_ast(args.file2)
+def main(path1, path2):
+    dump1 = load_and_normalize_ast(path1)
+    dump2 = load_and_normalize_ast(path2)
 
     similarity = difflib.SequenceMatcher(None, dump1, dump2).ratio()
-    print(f"Similarity: {similarity:.2%}")
+    return {path2: round(similarity * 100, 2)}
 
 if __name__ == '__main__':
     main()
