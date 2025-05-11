@@ -20,7 +20,7 @@ def getDiff(file1, file2):
   f2 = open(file2, 'r', encoding='utf-8', errors='ignore').read()
 
   lines1 = refactorCode.refactorCode(f1).splitlines(keepends=True)
-  lines2 = f2.splitlines(keepends=True)
+  lines2 = [line.lstrip() for line in f2.splitlines(keepends=True)]
 
   # Get similarities
   diff = list(difflib.ndiff(lines1, lines2))

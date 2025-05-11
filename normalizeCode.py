@@ -4,9 +4,9 @@ from io import BytesIO
 import re  
 import os
 
-def refactorCode(filePath, dir) -> str:
+def refactorCode(originalCode) -> str:
     """
-    Removes spaces, comments and changes all not reserved words for a default name.
+    Removes spaces, comments, and changes all non-reserved words to a default name, while preserving indentation.
     """
     keywords = set([
         'False', 'None', 'True', '_', 'and', 'as', 'assert', 'async', 
@@ -21,21 +21,26 @@ def refactorCode(filePath, dir) -> str:
     id_counter = 0
     newTokens = []
 
-    with open(filePath, 'r') as f:
-        originalCode = f.read()
+    lines = originalCode.splitlines()
 
     cleanedLines = []
     insideMultilineComment = False
-    for line in originalCode.splitlines():
-        if '"""' in line or "'''" in line:
-            insideMultilineComment = not insideMultilineComment
+    for line in lines:
+        cleanedLine = line.strip()
+        if '"""' in cleanedLine or "'''" in cleanedLine:
+            if insideMultilineComment:
+                insideMultilineComment = False
+            else:
+                insideMultilineComment = True
             continue  
-        elif insideMultilineComment or line.strip().startswith('#'):
-            continue 
-        else:
-            cleanedLine = ' '.join(line.strip().split())
-            if cleanedLine:  
-                cleanedLines.append(cleanedLine)
+        if insideMultilineComment or cleanedLine.startswith('#'):
+            continue
+        
+        cleanedLine = ' '.join(cleanedLine.split())
+        
+        if cleanedLine:
+            indentation = len(line) - len(line.lstrip())  
+            cleanedLines.append(' ' * indentation + cleanedLine)
 
     fileWithoutSpaces = '\n'.join(cleanedLines)
     fileWithoutSpaces = re.sub(r'\s*([+\-*/%&|^=<>!])\s*', r'\1', fileWithoutSpaces)
@@ -58,28 +63,31 @@ def refactorCode(filePath, dir) -> str:
             newTokens.append(token)
 
     result = tokenize.untokenize(newTokens)
+    return result.decode('utf-8')
+
+
+def refactor_file(input_path: str, output_path: str):
+    with open(input_path, 'r', encoding='utf-8') as f:
+        original_code = f.read()
+
+    refactored_code = refactorCode(original_code)
 
     outputDir = "./normalizedDataset"
+    os.makedirs(outputDir, exist_ok=True)
+    outputPath = os.path.join(outputDir, output_path)
 
-    os.makedirs('normalizedDataset', exist_ok=True)
-    filePath = os.path.join(outputDir, dir)
+    with open(outputPath, "w", encoding='utf-8') as f:
+        f.write(refactored_code)
 
-    with open(filePath, "w") as f:
-        f.write(result.decode('utf-8'))
-    # return result.decode('utf-8')
 
 def main():
-    path = './dataset'
-    dir_list = os.listdir(path)
-    print("Files and directories in '", path, "' :")
+    path = './dataset/'
+    dir_list = [f for f in os.listdir(path) if f.endswith('.py')]
+    print("Python files in '", path, "' :")
     print(dir_list)
 
     for dir in dir_list:
-        if dir != '.DS_Store':
-            refactorCode('dataset/' + dir, dir)
-
-    # refactorCode('dataset/' + 't1_1.py')
-
+        refactor_file(os.path.join(path, dir), dir)
 
 
 if __name__ == "__main__":
