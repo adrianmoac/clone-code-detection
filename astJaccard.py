@@ -41,6 +41,7 @@ def main(path1, path2):
     features2 = load_and_extract_features(path2)
 
     similarity = jaccard_similarity(features1, features2)
+    print(f"Jaccard similarity: {round(similarity * 100, 2)}%")
     return {path2: round(similarity * 100, 2)}
 
 if __name__ == '__main__':

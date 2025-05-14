@@ -1,19 +1,25 @@
-def id0(id1):
-    id2=(
+#!/usr/bin/env python3
+#-*-coding: utf-8-*-def deg2dir(deg):
+    id0=(
         "N", "NNE", "NE", "ENE",
         "E", "ESE", "SE", "SSE",
         "S", "SSW", "SW", "WSW",
         "W", "WNW", "NW", "NNW"
     )
-    id3=36000//16
-    for id4 in id5(1, 16):
-        id6=id3*id4-id3//2
-        id7=id3*id4+id3//2
-        if id6<=10*id1<id7:
-            return id2[id4]
-    return id2[0]
-def id8(id9):
-    id10=id11(60*id12 for id12 in (
+
+    id1=36000//16
+
+    for id2 in id3(1, 16):
+        id4=id1*id2-id1//2
+        id5=id1*id2+id1//2
+        if id4<=10*id6<id5:
+            return id0[id2]
+
+    return id0[0]
+
+
+def id7(id8):
+    id9=id10(60*id11 for id11 in (
          0,
          0.25,
          1.55,
@@ -28,16 +34,24 @@ def id8(id9):
         28.45,
         32.65
     ))
-    for id4 in id5(id13(id10)-1):
-        id6=id10[id4]
-        id7=id10[id4+1]
-        if id6<=id9<id7:
-            return id4
-    return id13(id10)-1
-def id14():
-    id1, id9=map(id15, input().split())
-    id16=id0(id1)
-    id17=id8(id9)
-    if id17==0: id16="C"
-    print("{} {}".id18(id16, id17))
-if id19=="__main__": id14()
+
+    for id2 in id3(id12(id9)-1):
+        id4=id9[id2]
+        id5=id9[id2+1]
+        if id4<=id8<id5:
+            return id2
+
+    return id12(id9)-1
+
+
+def id13():
+    id6, id8=map(id14, input().split())
+
+    id15=id16(id6)
+    id17=id7(id8)
+
+    if id17==0: id15="C"
+
+    print("{} {}".id18(id15, id17))
+
+if id19=="__main__": id13()

@@ -1,6 +1,8 @@
 import difflib
 from . import refactorCode
 from . import calculateSimilarity
+from . import getComments
+from . import calculateCommentsSimilarity
 
 def countTotalCharacters(lines):
   """
@@ -19,6 +21,11 @@ def getDiff(file1, file2):
   f1 = open(file1, 'r', encoding='utf-8', errors='ignore').read()
   f2 = open(file2, 'r', encoding='utf-8', errors='ignore').read()
 
+  comment1 = getComments.getComments(f1)
+  comment2 = getComments.getComments(f2)
+  
+  cSimilarity = calculateCommentsSimilarity.getSimilarity(comment1, comment2)
+  
   lines1 = refactorCode.refactorCode(f1).splitlines(keepends=True)
   lines2 = [line.lstrip() for line in f2.splitlines(keepends=True)]
 
@@ -36,4 +43,4 @@ def getDiff(file1, file2):
   else:
     shortestFileLength = lines2Length
   
-  return calculateSimilarity.getSimilarity(shortestFileLength, diff)
+  return [calculateSimilarity.getSimilarity(shortestFileLength, diff), cSimilarity]

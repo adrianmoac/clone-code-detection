@@ -23,26 +23,7 @@ def refactorCode(originalCode) -> str:
 
     lines = originalCode.splitlines()
 
-    cleanedLines = []
-    insideMultilineComment = False
-    for line in lines:
-        cleanedLine = line.strip()
-        if '"""' in cleanedLine or "'''" in cleanedLine:
-            if insideMultilineComment:
-                insideMultilineComment = False
-            else:
-                insideMultilineComment = True
-            continue  
-        if insideMultilineComment or cleanedLine.startswith('#'):
-            continue
-        
-        cleanedLine = ' '.join(cleanedLine.split())
-        
-        if cleanedLine:
-            indentation = len(line) - len(line.lstrip())  
-            cleanedLines.append(' ' * indentation + cleanedLine)
-
-    fileWithoutSpaces = '\n'.join(cleanedLines)
+    fileWithoutSpaces = '\n'.join(lines)
     fileWithoutSpaces = re.sub(r'\s*([+\-*/%&|^=<>!])\s*', r'\1', fileWithoutSpaces)
 
     tokens = tokenize.tokenize(BytesIO(fileWithoutSpaces.encode('utf-8')).readline)

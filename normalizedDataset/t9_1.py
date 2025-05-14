@@ -1,53 +1,67 @@
-id0, id1, id2=map(lambda id3:id4(id3), input().split(" "))
-id5, id6, id7, id8=map(lambda id3:id4(id3), input().split(" "))
-def id9(id10, id11, id12, id13, id14):
-  if id14<id12:
-    id15=(id14-id12)**2-id2**2+(id11-id10)**2
-    if id15>=0:
+#-*-coding: utf-8-*-x1, y1, r=map(lambda x:int(x), input().split(" "))
+id0, id1, id2, id3=map(lambda id4:id5(id4), input().split(" "))
+
+# 接点の有無
+def id6(id7, id8, id9, id10, id11):
+
+  if id11<id9:
+    id12=(id11-id9)**2-id13**2+(id8-id7)**2
+    if id12>=0:
       return False
-    id16=(id13-id12)**2-id2**2+(id11-id10)**2
-  elif ((id13+id14)/2<=id12) and id12<=id14:
-    id15=-id2**2+(id11-id10)**2
-    if id15>=0:
+    id14=(id10-id9)**2-id13**2+(id8-id7)**2
+  elif ((id10+id11)/2<=id9) and id9<=id11:
+    id12=-id13**2+(id8-id7)**2
+    if id12>=0:
       return False
-    id16=(id13-id12)**2-id2**2+(id11-id10)**2
-  elif id13<=id12 and (id12<=(id13+id14)/2):
-    id15=-id2**2+(id11-id10)**2
-    if id15>=0:
+    id14=(id10-id9)**2-id13**2+(id8-id7)**2
+  elif id10<=id9 and (id9<=(id10+id11)/2):
+    id12=-id13**2+(id8-id7)**2
+    if id12>=0:
       return False
-    id16=(id14-id12)**2-id2**2+(id11-id10)**2
-  elif id12<id13:
-    id15=(id13-id12)**2-id2**2+(id11-id10)**2
-    if id15>=0:
+    id14=(id11-id9)**2-id13**2+(id8-id7)**2
+  elif id9<id10:
+    id12=(id10-id9)**2-id13**2+(id8-id7)**2
+    if id12>=0:
       return False
-    id16=(id14-id12)**2-id2**2+(id11-id10)**2
-  if id15<0 and 0<id16:
+    id14=(id11-id9)**2-id13**2+(id8-id7)**2
+
+  if id12<0 and 0<id14:
     return True
   else:
     return False
-def id17():
-  if (id5-id0)**2+(id6-id1)**2<=id2**2:
+
+
+def id15():
+  #接点なし
+  if (id0-id16)**2+(id1-id17)**2<=id13**2:
+    # 円の中に四角
     print("YES")
     print("NO")
-  elif id5<id0 and id0<id7 and id6<id1 and id1<id8:
+  elif id0<id16 and id16<id2 and id1<id17 and id17<id3:
+    # 四角の中に円
     print("NO")
     print("YES")
   else:
+    # 四角の外に円
     print("YES")
     print("YES")
-if id7<id0-id2 or id0+id2<id5 or id8<id1-id2 or id1+id2<id6:
-  id17()
-elif id9(id0, id5, id1, id6, id8):
+
+
+if id2<id16-id13 or id16+id13<id0 or id3<id17-id13 or id17+id13<id1:
+  id15()
+#接点あり
+elif id6(id16, id0, id17, id1, id3):
   print("YES")
   print("YES")
-elif id9(id1, id8, id0, id5, id7):
+elif id6(id17, id3, id16, id0, id2):
   print("YES")
   print("YES")
-elif id9(id0, id7, id1, id6, id8):
+elif id6(id16, id2, id17, id1, id3):
   print("YES")
   print("YES")
-elif id9(id1, id6, id0, id5, id7):
+elif id6(id17, id1, id16, id0, id2):
   print("YES")
   print("YES")
+# 接点なし
 else:
-  id17()
+  id15()

@@ -2,6 +2,7 @@ import id0
 id1=id0.id2.id1
 id3=id0.id4.id3
 id5=id0.id4.id5
+
 def id6(id7):
     id3("?%d\n"%id7)
     id5()
@@ -9,22 +10,42 @@ def id6(id7):
 def id9(id7):
     id3("!%d\n"%id7)
     id5()
+
+"""
+N=123
+q=0
+def dummy(n, N):
+    return ((n<=N and str(n)<=str(N)) or (n>N and str(n)>str(N)))
+def query(n):
+    global q
+    q+=1
+    assert q<=64
+    print q, n, N, dummy(n, N)
+    return dummy(n, N)
+def answer(n):
+    print "check", n, N
+    assert n==N
+"""
+
 id10=None
 for id11 in id12(10):
     if not id6(10**id11):
         id10=id11
         break
 else:
+    # 10**k
     for id11 in id12(10):
         if id6(10**id11+1):
             id13=10**id11
             break
     id9(id13)
     id14(0)
+
 def id15(id13, id11):
     if id11==id10-1:
         return not id6(id16("".id17(map(id18, id13)))*10)
     return id6(id16("".id17(map(id18, id13))))
+
 id13=[]
 for id11 in id12(id10):
     id13.id19(0)
@@ -40,5 +61,6 @@ for id11 in id12(id10):
         id13[id11]=id20+1
     else:
         id13[id11]=id20
+
 id23=id16("".id17(map(id18, id13)))
 id9(id23)

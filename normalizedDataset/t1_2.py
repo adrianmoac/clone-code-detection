@@ -5,12 +5,14 @@ class id2:
         id4.id8=id5
         id4.id9=[1]*id5
         id4.id10=[0]*id5
+
     def id11(id4,id12):
         if id4.id6[id12]==id12:
             return id12
         else:
             id4.id6[id12]=id4.id11(id4.id6[id12])
             return id4.id6[id12]
+
     def id13(id4,id12,id14):
         id12=id4.id11(id12)
         id14=id4.id11(id14)
@@ -26,15 +28,19 @@ class id2:
             id4.id9[id12]+=id4.id9[id14]
             if id4.id10[id12]==id4.id10[id14]:
                 id4.id10[id12]+=1
+
     def id15(id4,id12,id14):
         if id4.id11(id12)==id4.id11(id14):
             return True
         else:
             return False
+
     def id16(id4):
         return id4.id8
+
     def id17(id4,id12):
         return id4.id9[id4.id11(id12)]
+
 id18,id19,id20=map(id21,id22().split())
 id23=id2(id18)
 id24=id2(id18)

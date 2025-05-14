@@ -24,6 +24,17 @@ def main():
 
   difflibResults = sorted(difflibResults, key=lambda d: list(d.values())[0], reverse=True)
   astResults = sorted(astResults, key=lambda d: list(d.values())[0], reverse=True)
+
+  similarityMatrix = []
+  
+  for res in astResults:
+      (file, similarity), = res.items()
+      isPlagiarism = similarity >= 60
+      similarityMatrix.append([file, similarity, isPlagiarism])
+
+    
+  # print(similarityMatrix)
+    
   print(difflibResults)
   print(astResults)
 
