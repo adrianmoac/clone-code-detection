@@ -1,0 +1,67 @@
+Deg,Dis = map(int, raw_input().split())
+
+Dir = "N"
+if Deg <= 112:
+    Dir = "N"
+elif Deg <= 337:
+    Dir = "NNE"
+elif Deg <= 562:
+    Dir = "NE"
+elif Deg <= 787:
+    Dir = "ENE"
+elif Deg <= 1012:
+    Dir = "E"
+elif Deg <= 1237:
+    Dir = "ESE"
+elif Deg <= 1462:
+    Dir = "SE"
+elif Deg <= 1687:
+    Dir = "SSE"
+elif Deg <= 1912:
+    Dir = "S"
+elif Deg <= 2137:
+    Dir = "SSW"
+elif Deg <= 2362:
+    Dir = "SW"
+elif Deg <= 2587:
+    Dir = "WSW"
+elif Deg <= 2812:
+    Dir = "W"
+elif Deg <= 3037:
+    Dir = "WNW"
+elif Deg <= 3262:
+    Dir = "NW"
+elif Deg <= 3487:
+    Dir = "NNW"
+
+s = Dis * 10 / 6
+s = (s + 5) / 10
+
+W = 12
+if s <= 2:
+    W = 0
+    Dir = "C"
+elif s <= 15:
+    W = 1
+elif s <= 33:
+    W = 2
+elif s <= 54:
+    W = 3
+elif s <= 79:
+    W = 4
+elif s <= 107:
+    W = 5
+elif s <= 138:
+    W = 6
+elif s <= 171:
+    W = 7
+elif s <= 207:
+    W = 8
+elif s <= 244:
+    W = 9
+elif s <= 284:
+    W = 10
+elif s <= 326:
+    W = 11
+
+print Dir, W

@@ -1,0 +1,67 @@
+id0,id1=map(id2, id3().split())
+
+id4="N"
+if id0<=112:
+    id4="N"
+elif id0<=337:
+    id4="NNE"
+elif id0<=562:
+    id4="NE"
+elif id0<=787:
+    id4="ENE"
+elif id0<=1012:
+    id4="E"
+elif id0<=1237:
+    id4="ESE"
+elif id0<=1462:
+    id4="SE"
+elif id0<=1687:
+    id4="SSE"
+elif id0<=1912:
+    id4="S"
+elif id0<=2137:
+    id4="SSW"
+elif id0<=2362:
+    id4="SW"
+elif id0<=2587:
+    id4="WSW"
+elif id0<=2812:
+    id4="W"
+elif id0<=3037:
+    id4="WNW"
+elif id0<=3262:
+    id4="NW"
+elif id0<=3487:
+    id4="NNW"
+
+id5=id1*10/6
+id5=(id5+5)/10
+
+id6=12
+if id5<=2:
+    id6=0
+    id4="C"
+elif id5<=15:
+    id6=1
+elif id5<=33:
+    id6=2
+elif id5<=54:
+    id6=3
+elif id5<=79:
+    id6=4
+elif id5<=107:
+    id6=5
+elif id5<=138:
+    id6=6
+elif id5<=171:
+    id6=7
+elif id5<=207:
+    id6=8
+elif id5<=244:
+    id6=9
+elif id5<=284:
+    id6=10
+elif id5<=326:
+    id6=11
+
+print id4, id6

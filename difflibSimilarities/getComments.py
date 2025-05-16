@@ -4,6 +4,8 @@ def getComments(originalCode):
   
   for line in originalCode.splitlines():
       stripped = line.strip()
+      
+      stripped = stripped.replace(' ', '')
 
       # Handle multiline comments / docstrings
       if ('"""' in stripped or "'''" in stripped):
@@ -19,10 +21,5 @@ def getComments(originalCode):
       if stripped.startswith('#'):
           extractedComments.append(stripped.lower())
           continue
-
-      # Inline comment
-      if '#' in line:
-          comment = line.split('#', 1)
-          extractedComments.append(comment.strip().lower)
 
   return extractedComments

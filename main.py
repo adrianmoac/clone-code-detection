@@ -33,8 +33,6 @@ def main():
       similarityMatrix.append([file, similarity, isPlagiarism])
 
     
-  # print(similarityMatrix)
-    
   print(difflibResults)
   print(astResults)
 
