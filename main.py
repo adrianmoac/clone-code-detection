@@ -1,25 +1,28 @@
 from difflibSimilarities.main import main as difflib_main
 from astSimilarities.main import main as ast_main 
 import os
-import argparse
+import sys
 
-def main():
-  parser = argparse.ArgumentParser(description="Compare files for similarity.")
-  parser.add_argument("path", help="Relative path to the file.")
+def main(filePath):
   difflibResults = []
   astResults = []
 
-  args = parser.parse_args()
-  
-  path = './normalizedDataset/'
+  if getattr(sys, 'frozen', False):
+      base_dir = sys._MEIPASS
+  else:
+      base_dir = os.path.dirname(os.path.abspath(__file__))
+  path = os.path.join(base_dir, 'normalizedDataset')
+
+  if not os.path.exists(path):
+      raise FileNotFoundError(f"Directory not found: {path}")
   dir_list = [f for f in os.listdir(path) if f.endswith('.py')]
 
   for dir in dir_list:
       # Percentage using difflib
-      dlResult = difflib_main(args.path, os.path.join(path, dir))
+      dlResult = difflib_main(filePath, os.path.join(path, dir))
       difflibResults.append(dlResult)
       #Percentage using AST
-      astResult = ast_main(args.path, os.path.join(path, dir))
+      astResult = ast_main(filePath, os.path.join(path, dir))
       astResults.append(astResult)
 
   difflibResults = sorted(difflibResults, key=lambda d: list(d.values())[0], reverse=True)
@@ -32,9 +35,4 @@ def main():
       isPlagiarism = similarity >= 60
       similarityMatrix.append([file, similarity, isPlagiarism])
 
-    
-  print(difflibResults)
-  print(astResults)
-
-if __name__ == "__main__":
-  main()
+  return [difflibResults, astResults]
