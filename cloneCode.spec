@@ -9,7 +9,7 @@ a = Analysis(
     ['pythonApp.py'],
     pathex=[],
     binaries=[],
-    datas=[(str(main_py_path), '.'), (str(original_dataset), 'originalDataset'), (str(normalized_dataset), 'normalizedDataset')],
+    datas=[(str(main_py_path), '.'), (str(original_dataset), 'originalDataset'), (str(normalized_dataset), 'normalizedDataset'), ('images/background.png', 'images'), ('images/addDocument.png', 'images'), ('images/document.png', 'images')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

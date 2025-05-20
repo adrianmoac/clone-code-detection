@@ -3,7 +3,7 @@ from astSimilarities.main import main as ast_main
 import os
 import sys
 
-def main(filePath):
+def main(filePath, detectionAlgorithm):
   difflibResults = []
   astResults = []
 
@@ -19,11 +19,13 @@ def main(filePath):
 
   for dir in dir_list:
       # Percentage using difflib
-      dlResult = difflib_main(filePath, os.path.join(path, dir))
-      difflibResults.append(dlResult)
+      if detectionAlgorithm == 'difflib':
+        dlResult = difflib_main(filePath, os.path.join(path, dir))
+        difflibResults.append(dlResult)
       #Percentage using AST
-      astResult = ast_main(filePath, os.path.join(path, dir))
-      astResults.append(astResult)
+      elif detectionAlgorithm == 'ast':
+        astResult = ast_main(filePath, os.path.join(path, dir))
+        astResults.append(astResult)
 
   difflibResults = sorted(difflibResults, key=lambda d: list(d.values())[0], reverse=True)
   astResults = sorted(astResults, key=lambda d: list(d.values())[0], reverse=True)
@@ -34,5 +36,8 @@ def main(filePath):
       (file, similarity), = res.items()
       isPlagiarism = similarity >= 60
       similarityMatrix.append([file, similarity, isPlagiarism])
-
-  return [difflibResults, astResults]
+      
+  if detectionAlgorithm == 'difflib':
+      return difflibResults
+  elif detectionAlgorithm == 'ast':
+      return astResults
