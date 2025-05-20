@@ -27,7 +27,6 @@ def load_and_extract_features(filepath):
         norm_tree = normalize_ast(tree)
         return get_node_type_set(norm_tree)
     except SyntaxError as e:
-        print(f"Syntax error in {filepath}: {e}")
         return set()
 
 def jaccard_similarity(set1, set2):
