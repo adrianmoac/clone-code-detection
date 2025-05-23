@@ -62,7 +62,7 @@ def refactor_file(input_path: str, output_path: str):
 
 
 def main():
-    path = './onlyCodes/'
+    path = './testDataset/'
     dir_list = [f for f in os.listdir(path) if f.endswith('.py')]
     print("Python files in '", path, "' :")
     print(dir_list)
