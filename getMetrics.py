@@ -1,6 +1,6 @@
 from difflibSimilarities.main import main as difflib_main
 from astSimilarities.main import main as ast_main
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import os
 import sys
 import json
@@ -81,6 +81,7 @@ def main(filePath, detectionAlgorithm):
     precision = precision_score(all_y_true, all_y_pred, average='binary')
     recall = recall_score(all_y_true, all_y_pred, average='binary')
     f1 = f1_score(all_y_true, all_y_pred, average='binary')
+    cm = confusion_matrix(all_y_true, all_y_pred)
 
     if detectionAlgorithm == 'difflib':
       print('difflib')
@@ -91,9 +92,13 @@ def main(filePath, detectionAlgorithm):
     print("Precision:", precision)
     print("Recall:", recall)
     print("F1 Score:", f1)
+    print("Confusion Matrix:")
+    print(cm)
 
     # Return the results for the last test file (optional logic can be added if needed)
     if detectionAlgorithm == 'difflib':
         return difflibResults
     elif detectionAlgorithm == 'ast':
         return astResults
+
+main("./testDataset", "ast")
